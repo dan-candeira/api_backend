@@ -1,5 +1,6 @@
-# credentials
-credentials.json
+# text files 
+*.json
+*.txt
 
 # node modules 
 node_modules

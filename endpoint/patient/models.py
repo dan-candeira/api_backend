@@ -17,9 +17,8 @@ class Patient(models.Model):
     address = models.CharField(max_length=255, null=True)
     lat = models.CharField(max_length=255, null=True)
     long = models.CharField(max_length=255, null=True)
-    collects = models.JSONField(null=True, blank=True)
+    collects = models.JSONField(
+        null=True, blank=True, editable=False, default=[])
     registration_date = models.DateTimeField(default=timezone.now)
     registered_by = models.EmailField(blank=True,
                                       null=True, validators=[EmailValidator, ])
-
-    objects = models.DjongoManager()

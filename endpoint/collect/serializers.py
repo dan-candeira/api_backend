@@ -14,6 +14,9 @@ from endpoint.loan_history.models import LoanHistory
 
 
 class CollectSerializer(serializers.ModelSerializer):
+    samples = serializers.ListField()
+    timestamp_init = serializers.DateTimeField()
+    timestamp_fin = serializers.DateTimeField()
 
     class Meta:
         model = Collect
@@ -46,7 +49,3 @@ class CollectSerializer(serializers.ModelSerializer):
         recieved_data['timestamp_fin'] = timezone.now()
 
         return super().create(recieved_data)
-
-    def update(self, instance, validated_data):
-        print('chamou')
-        return super().update(instance, validated_data)

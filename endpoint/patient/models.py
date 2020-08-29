@@ -2,8 +2,6 @@ from djongo import models
 from django.utils import timezone
 from django.core.validators import EmailValidator
 
-from endpoint.collect.models import Collect
-
 
 class Patient(models.Model):
     _id = models.CharField(null=False, unique=True,

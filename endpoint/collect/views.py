@@ -1,6 +1,20 @@
+# handles authentication and authorization
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets, mixins
+
+# create a viewset
+from rest_framework import viewsets
+
+# handles responses rest framework
+from rest_framework.response import Response
+from django.http.response import JsonResponse
+from rest_framework import status
+from django.http import Http404
+
+# handles id conversion from database
+from bson.objectid import ObjectId
+from bson.json_util import loads
+
 
 from endpoint.collect.serializers import CollectSerializer
 from endpoint.collect.models import Collect
@@ -8,12 +22,7 @@ from endpoint.collect.models import Collect
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class CollectViewSet(viewsets.GenericViewSet,
-                     mixins.ListModelMixin,
-                     mixins.CreateModelMixin,
-                     mixins.UpdateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.DestroyModelMixin):
+class CollectViewSet(viewsets.ModelViewSet):
 
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
@@ -21,8 +30,46 @@ class CollectViewSet(viewsets.GenericViewSet,
     serializer_class = CollectSerializer
     filter_backends = [DjangoFilterBackend]
 
-    def update(self, request, *args, **kwargs):
-        kwargs['_id'] = kwargs['pk']
-        del kwargs['pk']
+    def get_queryset(self):
 
-        return super().update(request, *args, **kwargs)
+        return self.queryset
+
+    def retrieve(self, request, *args, **kwargs):
+
+        try:
+            collect = Collect.objects.get(_id=ObjectId(kwargs['pk']))
+        except Exception:
+            raise Http404
+
+        serializer = CollectSerializer(collect)
+
+        return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            collect = Collect.objects.get(_id=ObjectId(kwargs['pk']))
+        except Exception:
+            raise Http404
+
+        data = loads(request.body)
+        print(data)
+
+        # https://stackoverflow.com/questions/1576664/how-to-update-multiple-fields-of-a-django-model-instance
+        for (key, value) in data.items():
+            if (key == 'samples'):
+                setattr(collect, key, value)
+        collect.save()
+
+        serializer = CollectSerializer(collect)
+
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            collect = Collect.objects.get(_id=ObjectId(kwargs['pk']))
+        except Exception:
+            raise Http404
+        collect_id = collect._id
+        collect.delete()
+
+        return JsonResponse({'message': f'collect {collect_id} was deleted.'}, status=status.HTTP_204_NO_CONTENT)

@@ -7,6 +7,7 @@ from rest_framework import viewsets
 
 # handles responses rest framework
 from rest_framework.response import Response
+from rest_framework.exceptions import MethodNotAllowed
 from django.http.response import JsonResponse
 from rest_framework import status
 from django.http import Http404
@@ -45,24 +46,9 @@ class CollectViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
+    # verify if this method with profº
     def update(self, request, *args, **kwargs):
-        try:
-            collect = Collect.objects.get(_id=ObjectId(kwargs['pk']))
-        except Exception:
-            raise Http404
-
-        data = loads(request.body)
-        print(data)
-
-        # https://stackoverflow.com/questions/1576664/how-to-update-multiple-fields-of-a-django-model-instance
-        for (key, value) in data.items():
-            if (key == 'samples'):
-                setattr(collect, key, value)
-        collect.save()
-
-        serializer = CollectSerializer(collect)
-
-        return Response(serializer.data)
+        raise MethodNotAllowed('update')
 
     def destroy(self, request, *args, **kwargs):
         try:

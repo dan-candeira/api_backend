@@ -8,12 +8,7 @@ from endpoint.patient.models import Patient
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class PatientViewSet(viewsets.GenericViewSet,
-                     mixins.ListModelMixin,
-                     mixins.CreateModelMixin,
-                     mixins.UpdateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.DestroyModelMixin):
+class PatientViewSet(viewsets.ModelViewSet):
 
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)

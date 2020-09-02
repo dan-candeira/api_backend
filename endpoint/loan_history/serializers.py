@@ -8,6 +8,7 @@ from endpoint.equipment.models import Equipment
 
 
 class LoanHistorySerializer(serializers.ModelSerializer):
+    devolution_date = serializers.DateTimeField()
 
     class Meta:
         model = LoanHistory

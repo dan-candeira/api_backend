@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework import status
+import json
 
 from django.utils import timezone
 import datetime
@@ -14,9 +15,9 @@ from endpoint.loan_history.models import LoanHistory
 
 
 class CollectSerializer(serializers.ModelSerializer):
-    samples = serializers.ListField()
-    timestamp_init = serializers.DateTimeField()
-    timestamp_fin = serializers.DateTimeField()
+    samples = serializers.ListField(required=False)
+    timestamp_init = serializers.DateTimeField(required=False)
+    timestamp_fin = serializers.DateTimeField(required=False)
 
     class Meta:
         model = Collect
@@ -29,27 +30,32 @@ class CollectSerializer(serializers.ModelSerializer):
         equipment = recieved_data['equipment']
 
         try:
+
             last_collect = Collect.objects.filter(
                 equipment_id=equipment._id).latest('timestamp_init')
 
             if last_collect.timestamp_init.date() == timezone.now().date():
                 return last_collect
 
+            pass
+
         except Exception:
 
-            # the rest of this code only will be executed
-            # if the conditional above is false
+            pass
 
-            recieved_data['timestamp_init'] = timezone.now()
+        # the rest of this code only will be executed
+        # if the conditional above is false
 
-            if (equipment.available):
-                msg = _("the equipment with id provided is not being used.")
-                raise ValidationError(
-                    detail=msg)
+        recieved_data['timestamp_init'] = timezone.now()
 
-            loan = LoanHistory.objects.get(equipment_id=equipment._id)
+        if (equipment.available):
+            msg = _("the equipment with id provided is not being used.")
+            raise ValidationError(
+                detail=msg)
 
-            recieved_data['patient_id'] = loan.patient_id
-            recieved_data['timestamp_fin'] = timezone.now()
+        loan = LoanHistory.objects.get(equipment_id=equipment._id)
 
-            return super().create(recieved_data)
+        recieved_data['patient_id'] = loan.patient_id
+        recieved_data['timestamp_fin'] = timezone.now()
+
+        return super().create(recieved_data)

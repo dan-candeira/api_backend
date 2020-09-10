@@ -48,6 +48,7 @@ class CollectViewSet(viewsets.ModelViewSet):
 
     # verify if this method with profº
     def update(self, request, *args, **kwargs):
+
         raise MethodNotAllowed('update')
 
     def destroy(self, request, *args, **kwargs):

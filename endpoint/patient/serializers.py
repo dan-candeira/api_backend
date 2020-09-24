@@ -1,5 +1,5 @@
 from rest_framework import serializers, status
-from rest_framework.views import exception_handler
+from rest_framework.exceptions import ValidationError
 from endpoint.patient.models import Patient
 from django.utils.translation import gettext_lazy as _
 
@@ -26,20 +26,18 @@ class PatientSerializer(serializers.ModelSerializer):
 
             currentUser = self.context['request'].user
             patient = Patient.objects.get(_id=data['_id'])
-
         except Exception:
+            pass
 
-            if patient:
+        if (patient):
+            raise ValidationError(
+                detail="A patient with this _id was alredy registered.", code=status.HTTP_400_BAD_REQUEST)
 
-                msg = _("a user with that id was alredy registered.")
-                raise serializers.ValidationError(
-                    msg, code='duplicated_key')
+        # verify if a user was authenticated and add his information to the database
+        if (str(currentUser) != "AnonymousUser"):
 
-            # verify if a user was authenticated and add his information to the database
-            if (str(currentUser) != "AnonymousUser"):
-
-                data["registered_by"] = currentUser
-
-                return super().create(data)
+            data["registered_by"] = currentUser
 
             return super().create(data)
+
+        return super().create(data)

@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.exceptions import MethodNotAllowed, NotFound
 from rest_framework import status
 from rest_framework.response import Response
+from django.http.response import JsonResponse
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -23,7 +24,8 @@ class SampleViewSet(viewsets.ModelViewSet):
         try:
             sample = Sample.objects.get(_id=ObjectId(kwargs['pk']))
         except Exception:
-            raise NotFound(detail="A smaple with this _id was not found.")
+            raise NotFound(
+                detail=f"A sample with _id:{kwargs['pk']} was not found.")
 
         serializer = SampleSerializer(sample)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -35,9 +37,8 @@ class SampleViewSet(viewsets.ModelViewSet):
         try:
             sample = Sample.objects.get(_id=ObjectId(kwargs['pk']))
         except Exception:
-            raise NotFound(detail="A smaple with this _id was not found.")
+            raise NotFound(
+                detail=f"A sample with _id:{kwargs['pk']} was not found.", code=status.HTTP_404_NOT_FOUND)
         sample.delete()
 
-        serializer = SampleSerializer(sample)
-
-        return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'data': f'{sample}'}, status=status.HTTP_204_NO_CONTENT)

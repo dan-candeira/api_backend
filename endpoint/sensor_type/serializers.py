@@ -1,8 +1,12 @@
 from rest_framework import serializers
 
+from endpoint.sensor_type.models import SensorType
+
 
 class SensorTypeSerializer(serializers.ModelSerializer):
     mesuaring_dimentions = serializers.ListField(required=True)
 
-    def create(self, validated_data):
-        return super().create(validated_data)
+    class Meta:
+        model = SensorType
+        fields = ("__all__")
+        read_only = ('_id',)

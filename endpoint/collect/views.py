@@ -31,10 +31,6 @@ class CollectViewSet(viewsets.ModelViewSet):
     serializer_class = CollectSerializer
     filter_backends = [DjangoFilterBackend]
 
-    def get_queryset(self):
-
-        return self.queryset
-
     def retrieve(self, request, *args, **kwargs):
 
         try:
@@ -59,4 +55,4 @@ class CollectViewSet(viewsets.ModelViewSet):
         collect_id = collect._id
         collect.delete()
 
-        return JsonResponse({'message': f'collect {collect_id} was deleted.'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'data': f'{collect}'}, status=status.HTTP_204_NO_CONTENT)

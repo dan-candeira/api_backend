@@ -8,5 +8,5 @@ class Equipment(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=False, blank=False)
     samp_frequency = models.IntegerField(null=False)
-    # sensors = models.ArrayReferenceField(to=Sensor, to_field='_id')
+    sensors = models.JSONField(null=False)
     available = models.BooleanField(default=True)

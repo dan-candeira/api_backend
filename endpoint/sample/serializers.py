@@ -1,5 +1,9 @@
 from rest_framework import serializers
 from rest_framework.exceptions import NotFound
+import time
+
+from django.utils import timezone
+from datetime import datetime
 
 from endpoint.sample.models import Sample
 from endpoint.collect.models import Collect
@@ -30,9 +34,8 @@ class SampleSerializer(serializers.ModelSerializer):
         collect_id = data['collect']
         size_error = False
 
-        for sample in data['captured_data']:
-            if len(sample) != len(header):
-                size_error = True
+        if len(data['captured_data']) != len(header):
+            size_error = True
 
         if size_error:
             msg = _(
@@ -42,8 +45,15 @@ class SampleSerializer(serializers.ModelSerializer):
         try:
             collect = Collect.objects.get(_id=ObjectId(collect_id))
         except Exception:
-            raise NotFound(detail="A collect with this _id was not found.")
+            raise NotFound(
+                detail=f"A collect with _id:{collect_id} was not found.")
 
         data['collect'] = collect
+
+        # add timesleep to verify if it will be reflected on the script
+        # time_stamp_ini = datetime.now()
+        # time.sleep(25)
+        # time_stamp_final = datetime.now()
+        # print(time_stamp_final - time_stamp_ini)
 
         return super().create(data)

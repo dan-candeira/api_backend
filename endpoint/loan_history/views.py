@@ -1,10 +1,9 @@
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, status
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from django.http.response import JsonResponse
-from rest_framework import status
 
 from endpoint.loan_history.serializers import LoanHistorySerializer
 from endpoint.loan_history.models import LoanHistory
@@ -32,8 +31,7 @@ class LoanHistoryViewSet(viewsets.ModelViewSet):
             raise NotFound
 
         serializer = LoanHistorySerializer(loan_history)
-
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
 
@@ -42,10 +40,9 @@ class LoanHistoryViewSet(viewsets.ModelViewSet):
         except Exception:
             raise NotFound
 
-        loan_history_id = loan_history._id
         loan_history.delete()
 
-        return JsonResponse({'message': f'loan history {loan_history_id} was deleted.'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'data': f'{loan_history}'}, status=status.HTTP_204_NO_CONTENT)
 
     def update(self, request, *args, **kwargs):
 
@@ -71,4 +68,4 @@ class LoanHistoryViewSet(viewsets.ModelViewSet):
 
         serializer = LoanHistorySerializer(loan_history)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

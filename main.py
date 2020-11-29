@@ -3,7 +3,12 @@ from starlette.responses import RedirectResponse
 
 from routes.user import router as UserRouter
 
-app = FastAPI()
+ALGORITHM = 'HS256'
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+app = FastAPI(
+    title="Motion Sense"
+)
 
 
 @app.get('/')

@@ -4,15 +4,6 @@ from typing import Optional
 from helpers.objectid import PyObjectId
 
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
-
-
 class UserBase(BaseModel):
     id: Optional[PyObjectId] = Field(
         alias='_id')
@@ -20,6 +11,7 @@ class UserBase(BaseModel):
     username: str
     email: str
     disabled: Optional[bool] = None
+    admin: Optional[bool] = None
 
     class Config:
         arbitrary_types_allowed = True

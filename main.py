@@ -2,9 +2,7 @@ from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 
 from routes.user import router as UserRouter
-
-ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+from routes.token import router as TokenRouter
 
 app = FastAPI(
     title="Motion Sense"
@@ -17,3 +15,4 @@ def read_root():
 
 
 app.include_router(UserRouter, prefix='/users')
+app.include_router(TokenRouter, prefix='/token')

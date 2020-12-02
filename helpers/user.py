@@ -13,8 +13,7 @@ from models.token import TokenData
 
 from helpers.password import verify_password
 
-
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+from settings import SECRET_KEY
 ALGORITHM = 'HS256'
 
 
@@ -76,3 +75,22 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({'exp': expire})
     encode_jtw = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encode_jtw
+
+
+def is_current_active_user_admin(user: User = Depends(get_current_user)):
+    if not user.admin:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='you are not an admin :('
+        )
+    return user
+
+
+def is_user_valid(user: User):
+    user_alredy_registered = get_user(user.username)
+    if user_alredy_registered is not None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='user alredy registered.'
+        )
+    return user

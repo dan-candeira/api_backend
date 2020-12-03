@@ -21,6 +21,5 @@ class Sensor(BaseModel):
             "model": "string",
             "measuring_dimention": "string",
             "description": "string",
-            "description": "string",
             "equipment": "string"
         }

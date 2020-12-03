@@ -6,6 +6,8 @@
 
 <br>
 
+<img src="./motion_sense.svg" alt="Motion Sense" width="200" style="margin: 2rem auto;" /> 
+<br>
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -46,13 +48,9 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * python
   
   macOS
@@ -102,10 +100,6 @@ This is an example of how to list things you need to use the software and how to
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-Project Link: [https://github.com/dan-candeira/api_backend](https://github.com/dan-candeira/api_backend)
 
 
 <!-- ACKNOWLEDGEMENTS -->

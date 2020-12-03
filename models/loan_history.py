@@ -10,8 +10,8 @@ from bson import ObjectId
 
 class LoanHistory(BaseModel):
     id: Optional[PyObjectId] = Field(alias='_id')
-    equipment: Optional[PyObjectId]
-    patient: Optional[PyObjectId]
+    equipment: PyObjectId
+    patient: PyObjectId
     loan_datetime: datetime
     devolution_datetime: Optional[datetime]
 

@@ -12,7 +12,7 @@ class Equipment(BaseModel):
     description: str
     samppling_frequency: str
     available: bool = True
-    sensors: List[PyObjectId]
+    sensors: Optional[List[PyObjectId]]
 
     class Config:
         arbitrary_types_allowed = True

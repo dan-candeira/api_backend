@@ -20,3 +20,8 @@ class LoanHistory(BaseModel):
         json_encoders = {
             ObjectId: str
         }
+        schema_extra = {
+            "equipment": "string",
+            "patient": "string",
+            "loan_datetime": "2020-12-03 14:25:06.365341"
+        }

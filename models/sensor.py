@@ -18,8 +18,10 @@ class Sensor(BaseModel):
             ObjectId: str
         }
         schema_extra = {
-            "model": "string",
-            "measuring_dimention": "string",
-            "description": "string",
-            "equipment": "string"
+            "example": {
+                "model": "string",
+                "measuring_dimention": "string",
+                "description": "string",
+                "equipment": "string"
+            }
         }

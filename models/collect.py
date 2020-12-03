@@ -23,3 +23,12 @@ class Collect(BaseModel):
         json_encoders = {
             ObjectId: str
         }
+        schema_extra = {
+            "example":{
+                "mac_address": "string",
+                "name": "string",
+                "description": "string",
+                "samppling_frequency": "string",
+                "available": "false"
+            }
+        }

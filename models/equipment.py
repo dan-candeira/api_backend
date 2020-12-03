@@ -20,9 +20,11 @@ class Equipment(BaseModel):
             ObjectId: str
         }
         schema_extra = {
-            "mac_address": "string",
-            "name": "string",
-            "description": "string",
-            "samppling_frequency": "string",
-            "available": "false"
+            "example": {
+                "mac_address": "string",
+                "name": "string",
+                "description": "string",
+                "samppling_frequency": "string",
+                "available": "false"
+            }
         }

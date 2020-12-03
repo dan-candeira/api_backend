@@ -20,7 +20,6 @@ class Equipment(BaseModel):
             ObjectId: str
         }
         schema_extra = {
-            "_id": "string",
             "mac_address": "string",
             "name": "string",
             "description": "string",

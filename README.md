@@ -6,7 +6,9 @@
 
 <br>
 
-<img src="./motion_sense.svg" alt="Motion Sense" width="200" style="margin: 3.5rem 40%;" /> 
+<p align="center"> 
+<img src="./motion_sense.svg" alt="Motion Sense" width="200" style="margin: 4.5rem 0" /> 
+</p>
 <br>
 <!-- TABLE OF CONTENTS -->
 <details open="open">

@@ -4,6 +4,7 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
+<br>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -36,13 +37,11 @@
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 
-<br>
 
 ### Built With
 * [Fastapi](https://fastapi.tiangolo.com/)
 * [Python](https://www.python.org/)
 
-<br>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -50,7 +49,6 @@
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-<br>
 
 ### Prerequisites
 
@@ -74,9 +72,6 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   py -m pip --version
   ```
-
-
-<br>
 
 ### Installation
 
@@ -102,7 +97,6 @@ This is an example of how to list things you need to use the software and how to
    uvicorn main:app --reload
    ```
 
-<br>
 
 <!-- LICENSE -->
 ## License
@@ -110,13 +104,9 @@ This is an example of how to list things you need to use the software and how to
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-<br>
-<br>
 
 Project Link: [https://github.com/dan-candeira/api_backend](https://github.com/dan-candeira/api_backend)
 
-<br>
-<br>
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements

@@ -4,7 +4,10 @@ from models.user import User
 from db import db
 
 from helpers.password import get_password_hash
-from helpers.user import get_current_active_user
+from helpers.user import (
+    get_current_active_user, 
+    is_current_active_user_admin, 
+    is_user_valid)
 
 
 router = APIRouter()
@@ -16,7 +19,7 @@ async def get_current_user(user: User = Depends(get_current_active_user)):
 
 
 @router.get('/', response_model=List[User])
-async def list_users():
+async def list_users(user: User = Depends(is_current_active_user_admin)):
     users = []
     for user in db.users.find():
         users.append(User(**user))
@@ -25,7 +28,7 @@ async def list_users():
 
 
 @router.post('/', response_model=User)
-async def create_user(user: User):
+async def create_user(user: User = Depends(is_user_valid)):
     if hasattr(user, 'id'):
         delattr(user, 'id')
 

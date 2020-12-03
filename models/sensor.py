@@ -17,3 +17,10 @@ class Sensor(BaseModel):
         json_encoders = {
             ObjectId: str
         }
+        schema_extra = {
+            "model": "string",
+            "measuring_dimention": "string",
+            "description": "string",
+            "description": "string",
+            "equipment": "string"
+        }

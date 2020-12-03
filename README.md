@@ -6,8 +6,9 @@
 
 <br>
 
-<p align="center"> 
-<img src="./motion_sense.svg" alt="Motion Sense" width="200" style="margin: 4.5rem 0" /> 
+<p align="center" style="margin: 4.5rem 0"> 
+  <img src="./motion_sense.svg" alt="Motion Sense Logo" width="200" height="100" /> 
+  <h3 align="center">Motion Sense API</h3>
 </p>
 <br>
 <!-- TABLE OF CONTENTS -->
@@ -33,13 +34,11 @@
   </ol>
 </details>
 
-<br>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
 
 
 ### Built With

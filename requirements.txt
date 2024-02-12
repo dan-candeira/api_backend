@@ -18,7 +18,7 @@ pydantic==1.6.2
 pymongo==3.11.1
 python-dotenv==0.15.0
 python-jose==3.2.0
-python-multipart==0.0.5
+python-multipart==0.0.7
 rsa==4.7
 Rx==1.6.1
 singledispatch==3.4.0.3

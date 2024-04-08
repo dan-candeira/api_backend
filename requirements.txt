@@ -15,7 +15,7 @@ pyasn1==0.4.8
 pycodestyle==2.6.0
 pycparser==2.20
 pydantic==1.6.2
-pymongo==3.11.1
+pymongo==4.6.3
 python-dotenv==0.15.0
 python-jose==3.2.0
 python-multipart==0.0.7

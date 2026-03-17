@@ -11,7 +11,7 @@ iso8601==2.1.0
 mongoengine==0.28.2
 passlib==1.7.4
 promise==2.3
-pyasn1==0.6.0
+pyasn1==0.6.3
 pycodestyle==2.11.1
 pycparser==2.22
 pydantic==2.7.1
